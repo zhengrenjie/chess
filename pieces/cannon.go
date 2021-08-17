@@ -65,7 +65,7 @@ func (c *Cannon) Next() []*Point {
 
 	/* go down */
 	carriage = false
-	for y := c.Point.Y(); y <= Ymax; y++ {
+	for y := c.Point.Y(); y >= Ymin; y-- {
 		cursor := y*10 + x0
 		if addPoint(cursor) {
 			continue
