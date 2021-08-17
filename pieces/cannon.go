@@ -15,7 +15,7 @@ func (c *Cannon) Next() []*Point {
 	addPoint := func(cursor int) bool {
 		piece, ok := Metrics[cursor]
 		if !carriage {
-			if ok {
+			if !ok {
 				ret = append(ret, NewPoint(cursor, nil))
 				return true
 			} else {
