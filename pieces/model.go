@@ -11,7 +11,7 @@ type Point struct {
 	point int
 	x     int
 	y     int
-	piece Piece
+	piece Piece // target, could be killed.
 }
 
 func (p Point) Piece() Piece {
@@ -31,7 +31,12 @@ func (p Point) Y() int {
 }
 
 func NewPoint(point int, piece Piece) *Point {
-	return &Point{}
+	return &Point{
+		point: point,
+		x:     point % 10,
+		y:     point / 10,
+		piece: piece,
+	}
 }
 
 var (
@@ -42,10 +47,9 @@ var (
 
 type Piece interface {
 	Side() Side
-	Coordination() Point
+	Point() Point
 
 	Next() []Point
-	Aim() []Piece
 }
 
 type Rook struct {
@@ -55,9 +59,6 @@ type Minister struct {
 }
 
 type Guard struct {
-}
-
-type Cannon struct {
 }
 
 type Pawn struct {
