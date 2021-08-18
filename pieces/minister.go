@@ -4,6 +4,17 @@ type Minister struct {
 	PieceImpl
 }
 
+func (m *Minister) Type() PieceType {
+	return TypeMinister
+}
+
+func (m *Minister) String() string {
+	if m.Side() == SideRed {
+		return "相"
+	}
+	return "象"
+}
+
 func (m *Minister) Next() []*Point {
 	ret := make([]*Point, 0)
 	point := m.Point().Point()

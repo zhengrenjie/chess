@@ -6,6 +6,17 @@ type King struct {
 	PieceImpl
 }
 
+func (k *King) Type() PieceType {
+	return TypeKing
+}
+
+func (k *King) String() string {
+	if k.Side() == SideRed {
+		return "帅"
+	}
+	return "将"
+}
+
 func (k *King) Next() []*Point {
 	ret := make([]*Point, 0)
 

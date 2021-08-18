@@ -4,6 +4,14 @@ type Cannon struct {
 	PieceImpl
 }
 
+func (c *Cannon) Type() PieceType {
+	return TypeCannon
+}
+
+func (c *Cannon) String() string {
+	return "炮"
+}
+
 func (c *Cannon) Next() []*Point {
 	ret := make([]*Point, 0)
 

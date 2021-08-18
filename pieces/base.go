@@ -75,15 +75,16 @@ func NewPoint(point int, piece Piece) *Point {
 
 type Piece interface {
 	Context() *Board
+	Type() PieceType
 	Side() Side
-	Point() Point
+	Point() *Point
 
 	Next() []*Point
 }
 
 type PieceImpl struct {
 	side  Side
-	point Point
+	point *Point
 	board *Board
 }
 
@@ -91,7 +92,7 @@ func (p *PieceImpl) Side() Side {
 	return p.side
 }
 
-func (p *PieceImpl) Point() Point {
+func (p *PieceImpl) Point() *Point {
 	return p.point
 }
 

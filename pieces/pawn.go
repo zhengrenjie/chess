@@ -4,6 +4,17 @@ type Pawn struct {
 	PieceImpl
 }
 
+func (p *Pawn) Type() PieceType {
+	return TypePawn
+}
+
+func (p *Pawn) String() string {
+	if p.Side() == SideRed {
+		return "兵"
+	}
+	return "卒"
+}
+
 func (p *Pawn) Next() []*Point {
 	ret := make([]*Point, 0)
 

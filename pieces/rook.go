@@ -4,6 +4,14 @@ type Rook struct {
 	PieceImpl
 }
 
+func (r *Rook) Type() PieceType {
+	return TypeRook
+}
+
+func (r *Rook) String() string {
+	return "車"
+}
+
 func (r *Rook) Next() []*Point {
 	ret := make([]*Point, 0)
 

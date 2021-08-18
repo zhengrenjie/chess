@@ -4,6 +4,17 @@ type Guard struct {
 	PieceImpl
 }
 
+func (g *Guard) Type() PieceType {
+	return TypeGuard
+}
+
+func (g *Guard) String() string {
+	if g.Side() == SideRed {
+		return "仕"
+	}
+	return "士"
+}
+
 func (g *Guard) Next() []*Point {
 	ret := make([]*Point, 0)
 	point := g.Point().Point()

@@ -4,6 +4,14 @@ type Horse struct {
 	PieceImpl
 }
 
+func (h *Horse) Type() PieceType {
+	return TypeHorse
+}
+
+func (h *Horse) String() string {
+	return "馬"
+}
+
 func (h *Horse) Next() []*Point {
 	ret := make([]*Point, 0)
 
