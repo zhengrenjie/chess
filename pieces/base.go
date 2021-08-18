@@ -1,14 +1,38 @@
 package pieces
 
+type Side int
+type PieceType int
+
 const (
 	Xmin = 0
 	Xmax = 8
 	Ymin = 0
 	Ymax = 9
+
+	SideRed   Side = 1
+	SideBlack Side = -1
+
+	TypeRook PieceType = iota + 1
+	TypeHorse
+	TypeMinister
+	TypeGuard
+	TypeKing
+	TypeCannon
+	TypePawn
 )
 
-func addPoint(point int, side Side, points *[]*Point) {
-	if piece, ok := Metrics[point]; ok {
+var (
+	_ Piece = &Rook{}
+	_ Piece = &Horse{}
+	_ Piece = &Minister{}
+	_ Piece = &Guard{}
+	_ Piece = &King{}
+	_ Piece = &Cannon{}
+	_ Piece = &Pawn{}
+)
+
+func addPoint(point int, side Side, board *Board, points *[]*Point) {
+	if piece, ok := board.Metrics[point]; ok {
 		if piece.Side() == side {
 			*points = append(*points, NewPoint(point, piece))
 		}
@@ -16,13 +40,6 @@ func addPoint(point int, side Side, points *[]*Point) {
 		*points = append(*points, NewPoint(point, nil))
 	}
 }
-
-type Side int
-
-const (
-	SideRed   Side = 1
-	SideBlack Side = -1
-)
 
 type Point struct {
 	point int
@@ -56,21 +73,8 @@ func NewPoint(point int, piece Piece) *Point {
 	}
 }
 
-var (
-	Red     map[int]Piece
-	Black   map[int]Piece
-	Metrics map[int]Piece
-
-	_ Piece = &Rook{}
-	_ Piece = &Horse{}
-	_ Piece = &Minister{}
-	_ Piece = &Guard{}
-	_ Piece = &King{}
-	_ Piece = &Cannon{}
-	_ Piece = &Pawn{}
-)
-
 type Piece interface {
+	Context() *Board
 	Side() Side
 	Point() Point
 
@@ -80,6 +84,7 @@ type Piece interface {
 type PieceImpl struct {
 	side  Side
 	point Point
+	board *Board
 }
 
 func (p *PieceImpl) Side() Side {
@@ -88,4 +93,8 @@ func (p *PieceImpl) Side() Side {
 
 func (p *PieceImpl) Point() Point {
 	return p.point
+}
+
+func (p *PieceImpl) Context() *Board {
+	return p.board
 }

@@ -12,7 +12,7 @@ func (c *Cannon) Next() []*Point {
 
 	carriage := false
 	addPoint := func(cursor int) bool {
-		piece, ok := Metrics[cursor]
+		piece, ok := c.Context().Metrics[cursor]
 		if !carriage {
 			if !ok {
 				ret = append(ret, NewPoint(cursor, nil))

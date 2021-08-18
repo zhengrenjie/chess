@@ -13,52 +13,52 @@ func (h *Horse) Next() []*Point {
 
 	/* jump down */
 	if y0-2 >= Ymin {
-		_, ok := Metrics[point-10]
+		_, ok := h.Context().Metrics[point-10]
 		if !ok {
 			if x0 > Xmin {
-				addPoint(point-20-1, -h.Side(), &ret)
+				addPoint(point-20-1, -h.Side(), h.Context(), &ret)
 			}
 			if x0 < Xmax {
-				addPoint(point-20+1, -h.Side(), &ret)
+				addPoint(point-20+1, -h.Side(), h.Context(), &ret)
 			}
 		}
 	}
 
 	/* jump up */
 	if y0+2 <= Ymax {
-		_, ok := Metrics[point+10]
+		_, ok := h.Context().Metrics[point+10]
 		if !ok {
 			if x0 > Xmin {
-				addPoint(point+20-1, -h.Side(), &ret)
+				addPoint(point+20-1, -h.Side(), h.Context(), &ret)
 			}
 			if x0 < Xmax {
-				addPoint(point+20+1, -h.Side(), &ret)
+				addPoint(point+20+1, -h.Side(), h.Context(), &ret)
 			}
 		}
 	}
 
 	/* jump left */
 	if x0-2 >= Xmin {
-		_, ok := Metrics[point-1]
+		_, ok := h.Context().Metrics[point-1]
 		if !ok {
 			if y0 > Ymin {
-				addPoint(point-2-10, -h.Side(), &ret)
+				addPoint(point-2-10, -h.Side(), h.Context(), &ret)
 			}
 			if y0 < Ymax {
-				addPoint(point-2+10, -h.Side(), &ret)
+				addPoint(point-2+10, -h.Side(), h.Context(), &ret)
 			}
 		}
 	}
 
 	/* jump right */
 	if x0+2 <= Xmax {
-		_, ok := Metrics[point+1]
+		_, ok := h.Context().Metrics[point+1]
 		if !ok {
 			if y0 > Ymin {
-				addPoint(point+2-10, -h.Side(), &ret)
+				addPoint(point+2-10, -h.Side(), h.Context(), &ret)
 			}
 			if y0 < Ymax {
-				addPoint(point+2+10, -h.Side(), &ret)
+				addPoint(point+2+10, -h.Side(), h.Context(), &ret)
 			}
 		}
 	}

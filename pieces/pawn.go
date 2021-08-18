@@ -14,36 +14,36 @@ func (p *Pawn) Next() []*Point {
 	if p.Side() == SideRed {
 		if y0 > 4 {
 			if x0 > Xmin {
-				addPoint(point-1, SideBlack, &ret)
+				addPoint(point-1, SideBlack, p.Context(), &ret)
 			}
 
 			if x0 < Xmax {
-				addPoint(point+1, SideBlack, &ret)
+				addPoint(point+1, SideBlack, p.Context(), &ret)
 			}
 
 			if y0 < Ymax {
-				addPoint(point+10, SideBlack, &ret)
+				addPoint(point+10, SideBlack, p.Context(), &ret)
 			}
 		} else {
-			addPoint(point+10, SideBlack, &ret)
+			addPoint(point+10, SideBlack, p.Context(), &ret)
 		}
 	}
 
 	if p.Side() == SideBlack {
 		if y0 < 5 {
 			if x0 > Xmin {
-				addPoint(point-1, SideRed, &ret)
+				addPoint(point-1, SideRed, p.Context(), &ret)
 			}
 
 			if x0 < Xmax {
-				addPoint(point+1, SideRed, &ret)
+				addPoint(point+1, SideRed, p.Context(), &ret)
 			}
 
 			if y0 > Ymin {
-				addPoint(point-10, SideRed, &ret)
+				addPoint(point-10, SideRed, p.Context(), &ret)
 			}
 		} else {
-			addPoint(point-10, SideRed, &ret)
+			addPoint(point-10, SideRed, p.Context(), &ret)
 		}
 	}
 

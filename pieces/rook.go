@@ -11,7 +11,7 @@ func (r *Rook) Next() []*Point {
 	y0 := r.Point().Y()
 
 	addPoint := func(cursor int) bool {
-		piece, ok := Metrics[cursor]
+		piece, ok := r.Context().Metrics[cursor]
 		if ok {
 			if piece.Side() == -r.Side() {
 				ret = append(ret, NewPoint(cursor, piece))
