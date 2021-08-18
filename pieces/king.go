@@ -3,15 +3,14 @@ package pieces
 const ()
 
 type King struct {
-	Side  Side
-	Point Point
+	PieceImpl
 }
 
 func (k *King) Next() []*Point {
 	ret := make([]*Point, 0)
 
-	if k.Side == SideRed {
-		switch k.Point.point {
+	if k.Side() == SideRed {
+		switch k.Point().Point() {
 		case 3:
 			addPoint(4, SideBlack, &ret)
 			addPoint(13, SideBlack, &ret)
@@ -48,8 +47,8 @@ func (k *King) Next() []*Point {
 		}
 	}
 
-	if k.Side == SideBlack {
-		switch k.Point.point {
+	if k.Side() == SideBlack {
+		switch k.Point().Point() {
 		case 93:
 			addPoint(94, SideRed, &ret)
 			addPoint(83, SideRed, &ret)

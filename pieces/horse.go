@@ -1,61 +1,64 @@
 package pieces
 
 type Horse struct {
-	Side  Side
-	Point Point
+	PieceImpl
 }
 
 func (h *Horse) Next() []*Point {
 	ret := make([]*Point, 0)
 
+	point := h.Point().Point()
+	x0 := h.Point().X()
+	y0 := h.Point().Y()
+
 	/* jump down */
-	if h.Point.Y()-2 >= Ymin {
-		_, ok := Metrics[h.Point.point-10]
+	if y0-2 >= Ymin {
+		_, ok := Metrics[point-10]
 		if !ok {
-			if h.Point.X() > Xmin {
-				addPoint(h.Point.point-20-1, -h.Side, &ret)
+			if x0 > Xmin {
+				addPoint(point-20-1, -h.Side(), &ret)
 			}
-			if h.Point.X() < Xmax {
-				addPoint(h.Point.point-20+1, -h.Side, &ret)
+			if x0 < Xmax {
+				addPoint(point-20+1, -h.Side(), &ret)
 			}
 		}
 	}
 
 	/* jump up */
-	if h.Point.Y()+2 <= Ymax {
-		_, ok := Metrics[h.Point.point+10]
+	if y0+2 <= Ymax {
+		_, ok := Metrics[point+10]
 		if !ok {
-			if h.Point.X() > Xmin {
-				addPoint(h.Point.point+20-1, -h.Side, &ret)
+			if x0 > Xmin {
+				addPoint(point+20-1, -h.Side(), &ret)
 			}
-			if h.Point.X() < Xmax {
-				addPoint(h.Point.point+20+1, -h.Side, &ret)
+			if x0 < Xmax {
+				addPoint(point+20+1, -h.Side(), &ret)
 			}
 		}
 	}
 
 	/* jump left */
-	if h.Point.X()-2 >= Xmin {
-		_, ok := Metrics[h.Point.point-1]
+	if x0-2 >= Xmin {
+		_, ok := Metrics[point-1]
 		if !ok {
-			if h.Point.Y() > Ymin {
-				addPoint(h.Point.point-2-10, -h.Side, &ret)
+			if y0 > Ymin {
+				addPoint(point-2-10, -h.Side(), &ret)
 			}
-			if h.Point.Y() < Ymax {
-				addPoint(h.Point.point-2+10, -h.Side, &ret)
+			if y0 < Ymax {
+				addPoint(point-2+10, -h.Side(), &ret)
 			}
 		}
 	}
 
 	/* jump right */
-	if h.Point.X()+2 <= Xmax {
-		_, ok := Metrics[h.Point.point+1]
+	if x0+2 <= Xmax {
+		_, ok := Metrics[point+1]
 		if !ok {
-			if h.Point.Y() > Ymin {
-				addPoint(h.Point.point+2-10, -h.Side, &ret)
+			if y0 > Ymin {
+				addPoint(point+2-10, -h.Side(), &ret)
 			}
-			if h.Point.Y() < Ymax {
-				addPoint(h.Point.point+2+10, -h.Side, &ret)
+			if y0 < Ymax {
+				addPoint(point+2+10, -h.Side(), &ret)
 			}
 		}
 	}

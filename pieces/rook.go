@@ -1,33 +1,25 @@
 package pieces
 
-type Cannon struct {
+type Rook struct {
 	PieceImpl
 }
 
-func (c *Cannon) Next() []*Point {
+func (r *Rook) Next() []*Point {
 	ret := make([]*Point, 0)
 
-	x0 := c.point.X()
-	y0 := c.point.Y()
+	x0 := r.Point().X()
+	y0 := r.Point().Y()
 
-	carriage := false
 	addPoint := func(cursor int) bool {
 		piece, ok := Metrics[cursor]
-		if !carriage {
-			if !ok {
-				ret = append(ret, NewPoint(cursor, nil))
-				return true
-			} else {
-				carriage = true
-				return true
+		if ok {
+			if piece.Side() == -r.Side() {
+				ret = append(ret, NewPoint(cursor, piece))
 			}
+
+			return false
 		} else {
-			if ok {
-				if piece.Side() == -c.Side() {
-					ret = append(ret, NewPoint(cursor, piece))
-				}
-				return false
-			}
+			ret = append(ret, NewPoint(cursor, nil))
 		}
 
 		return true
@@ -43,7 +35,6 @@ func (c *Cannon) Next() []*Point {
 	}
 
 	/* go left */
-	carriage = false
 	for x := x0; x >= Xmin; x-- {
 		cursor := y0*10 + x
 		if addPoint(cursor) {
@@ -53,7 +44,6 @@ func (c *Cannon) Next() []*Point {
 	}
 
 	/* go up */
-	carriage = false
 	for y := y0; y <= Ymax; y++ {
 		cursor := y*10 + x0
 		if addPoint(cursor) {
@@ -63,7 +53,6 @@ func (c *Cannon) Next() []*Point {
 	}
 
 	/* go down */
-	carriage = false
 	for y := y0; y >= Ymin; y-- {
 		cursor := y*10 + x0
 		if addPoint(cursor) {

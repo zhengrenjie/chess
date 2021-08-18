@@ -1,5 +1,22 @@
 package pieces
 
+const (
+	Xmin = 0
+	Xmax = 8
+	Ymin = 0
+	Ymax = 9
+)
+
+func addPoint(point int, side Side, points *[]*Point) {
+	if piece, ok := Metrics[point]; ok {
+		if piece.Side() == side {
+			*points = append(*points, NewPoint(point, piece))
+		}
+	} else {
+		*points = append(*points, NewPoint(point, nil))
+	}
+}
+
 type Side int
 
 const (
@@ -43,23 +60,32 @@ var (
 	Red     map[int]Piece
 	Black   map[int]Piece
 	Metrics map[int]Piece
+
+	_ Piece = &Rook{}
+	_ Piece = &Horse{}
+	_ Piece = &Minister{}
+	_ Piece = &Guard{}
+	_ Piece = &King{}
+	_ Piece = &Cannon{}
+	_ Piece = &Pawn{}
 )
 
 type Piece interface {
 	Side() Side
 	Point() Point
 
-	Next() []Point
+	Next() []*Point
 }
 
-type Rook struct {
+type PieceImpl struct {
+	side  Side
+	point Point
 }
 
-type Minister struct {
+func (p *PieceImpl) Side() Side {
+	return p.side
 }
 
-type Guard struct {
-}
-
-type Pawn struct {
+func (p *PieceImpl) Point() Point {
+	return p.point
 }
